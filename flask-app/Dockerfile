@@ -1,10 +1,6 @@
-#Use Python Image
 FROM python:3.8
 
-RUN apt update
-RUN apt install python3-pip -y
-
-RUN pip3 install flask, flask_sqlalchemy
+RUN pip3 install flask flask-sqlalchemy cryptography pymysql
 
 EXPOSE 5000
 

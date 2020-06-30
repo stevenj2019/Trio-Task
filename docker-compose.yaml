@@ -1,20 +1,22 @@
 version: '3.8'
 services:
   mysql:
-    image: mysql
+    build: ./db
     ports:
     - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: flask_prod
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
   flask:
-    image: python:3.8
+    build: ./flask-app
     ports:
     - "5000:5000"
     depends_on:
     - mysql
     environment:
-      URI: mysql+pymysql://root:root@mysql/flask_prod
+      URI: mysql+pymysql://admin:admin@mysql:3306/flask_prod
       SKEY: oigh0[woifhodushvk]
   nginx:
     image: nginx 
