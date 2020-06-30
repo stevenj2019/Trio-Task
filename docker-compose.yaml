@@ -22,5 +22,5 @@ services:
     - flask
     volumes:
     - type: bind
-      source: $(pwd)/nginx/ngix.conf
-      target: /etc/nginx/nginx:ro 
+      source: ./nginx/nginx.conf
+      target: /etc/nginx/nginx.conf
