@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql
+    ports:
+    - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: flask_prod
+  flask:
+    image: python:3.8
+    ports:
+    - "5000:5000"
+    depends_on:
+    - mysql
+    environment:
+      URI: mysql+pymysql://root:root@mysql/flask_prod
+      SKEY: oigh0[woifhodushvk]
+  nginx:
+    image: nginx 
+    depends_on:
+    - flask
+    volumes:
+    - type: bind
+      source: $(pwd)/nginx/ngix.conf
+      target: /etc/nginx/nginx:ro 
