@@ -2,26 +2,10 @@ version: '3.8'
 services:
   mysql:
     container_name: mysql
-    build:
-      context: ./db
-      args:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: flask_prod
-    ports:
-    - "3306:3306"
-    #environment:
-      #MYSQL_ROOT_PASSWORD: root
-      #MYSQL_DATABASE: flask_prod
+    image: sjohnson2019/mysql
   flask:
     container_name: flask
-    build: ./flask-app
-    ports:
-    - "5000:5000"
-    depends_on:
-    - mysql
-    environment:
-      URI: mysql+pymysql://root:root@mysql:3306/flask_prod
-      SKEY: oigh0[woifhodushvk]
+    image: sjohnson2019/flask
   nginx:
     image: nginx:alpine
     ports:
